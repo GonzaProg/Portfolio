@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "about": "About",
+    "education": "Education",
+    "skills": "Skills",
+    "projects": "Projects"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "name": "Gonzalo",
+    "role": "Developer & Engineering Student",
+    "description": "I am 24 years old, currently a student and soon to be an Information Systems Engineer. Passionate about technology and programming with a desire to keep learning and creating innovative solutions.",
+    "contact": "Contact"
+  },
+  "education": {
+    "title": "Education",
+    "item1": {
+      "title": "Mechanical Electrical Technician",
+      "date": "03/01/2014 - 12/18/2020",
+      "institution": "Escuela de Educación Técnica N°1 \"Dr Osvaldo Magnasco\"",
+      "description": [
+        "Comprehensive technical training focused on the design, assembly, maintenance, and diagnosis of mechanical, electrical, and electromechanical systems.",
+        "Acquisition of practical skills in wiring residential and industrial electrical circuits, interpreting technical drawings, and applying health and safety regulations.",
+        "Design, assembly, soldering, and testing of printed circuit boards (PCBs), handling of measurement instruments (multimeters, oscilloscopes), and troubleshooting in analog and digital components.",
+        "Development of logical reasoning, technical problem solving in the workshop, and collaborative work in interdisciplinary projects."
+      ],
+      "download": "Download Title (PDF)"
+    },
+    "item2": {
+      "title": "Full Stack Developer",
+      "date": "June 2022 - June 2023",
+      "institution": "Argentina Programa (4th edition)",
+      "description": [
+        "Intensive training focused on the conception, development, deployment, and production of robust and scalable web applications from end to end.",
+        "Frontend: Creation of dynamic, responsive, and interactive user interfaces implementing layout best practices, adaptive design, and efficient consumption of external services.",
+        "Backend & APIs: Design and implementation of REST API-based architectures, business logic management, authentication, authorization, and data validation.",
+        "Databases: Conceptual and relational database modeling, structured query execution, normalization, and data persistence.",
+        "Software Lifecycle: Version control integration with Git/GitHub, systematic bug resolution, testing, and continuous deployment in production environments (Cloud/Hosting)."
+      ],
+      "download": "Download Certificate (PDF)"
+    }
+  },
+  "skills": {
+    "title": "Technologies and Languages",
+    "frontend": "Frontend & Mobile",
+    "backend": "Backend & Databases",
+    "tools": "Other Languages & Tools",
+    "hardware": "Hardware/IoT"
+  },
+  "projects": {
+    "title": "Projects",
+    "download": "Download Project Files (.zip)",
+    "visit": "Visit Project",
+    "item1": {
+      "title": "Conversational Chatterbot",
+      "description": "Chatterbot with information on obtaining a driver's license, using the Lazarus development tool, based on the Object Pascal programming language."
+    },
+    "item2": {
+      "title": "Dentist Office Simulation",
+      "description": "Project developed in the Lazarus development tool, based on the Object Pascal programming language. It allows adding people and their respective consultations, generating different statistics with this data."
+    },
+    "item3": {
+      "title": "Tourist Travel Management",
+      "description": "Project developed in VisualWorks (SmallTalk). This project allows the creation and reservation of tourist packages, in addition to having different statistics based on the entered data. All data is saved in local files."
+    },
+    "item4": {
+      "title": "GymMate - Multiplatform Ecosystem for Gyms 🌟",
+      "status": "In Production!",
+      "description": "A comprehensive SaaS (Software as a Service) solution currently in production and actively used by two gyms. The project is designed for the total management of the establishment and direct interaction with clients, standing out for its full accessibility by being deployed on Web, Android (PlayStore), iOS (Apple Store), and PC (Desktop Application).",
+      "features": {
+        "f1": "Modern Stack: Built with React, TypeScript and Vite, styled with TailwindCSS.",
+        "f2": "Multiplatform Magic: Implementation of Capacitor and Electron.",
+        "f3": "UX: QR scanner integration, interactive charts, and dynamic alerts.",
+        "f4": "Robust Backend: Node.js, Express, PostgreSQL with TypeORM, JWT.",
+        "f5": "Integrations: MercadoPago, WhatsApp Bot, Firebase, Cloudinary."
+      }
+    }
+  }
+}

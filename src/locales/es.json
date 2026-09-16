@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "about": "Sobre Mí",
+    "education": "Estudios",
+    "skills": "Tecnologías",
+    "projects": "Proyectos"
+  },
+  "hero": {
+    "greeting": "Hola soy",
+    "name": "Gonzalo",
+    "role": "Desarrollador & Estudiante de Ingeniería",
+    "description": "Tengo 24 años, actualmente estudiante y próximo a ser Ingeniero en Sistemas de Información. Apasionado a la tecnología y la programación con ganas de seguir aprendiendo y crear soluciones innovadoras.",
+    "contact": "Contacto"
+  },
+  "education": {
+    "title": "Estudios",
+    "item1": {
+      "title": "Técnico Mecánico Electricista",
+      "date": "01/03/2014 - 18/12/2020",
+      "institution": "Escuela de Educación Técnica N°1 \"Dr Osvaldo Magnasco\"",
+      "description": [
+        "Formación técnica integral orientada al diseño, montaje, mantenimiento y diagnóstico de sistemas mecánicos, eléctricos y electromecánicos.",
+        "Adquisición de competencias prácticas en conexionado de circuitos eléctricos domiciliarios e industriales, interpretación de planos técnicos y aplicación de normas de seguridad e higiene.",
+        "Diseño, armado, soldado y testeo de plaquetas electrónicas (PCB), manipulación de instrumental de medición (multímetros, osciloscopios) y resolución de fallas en componentes analógicos y digitales.",
+        "Desarrollo de criterio lógico, resolución de problemas técnicos en taller y trabajo colaborativo en proyectos interdisciplinarios."
+      ],
+      "download": "Descargar Título (PDF)"
+    },
+    "item2": {
+      "title": "Desarrollador Full Stack",
+      "date": "Junio 2022 - Junio 2023",
+      "institution": "Argentina Programa (4ta edición)",
+      "description": [
+        "Capacitación intensiva orientada a la concepción, desarrollo, despliegue y puesta en producción de aplicaciones web robustas y escalables de extremo a extremo.",
+        "Frontend: Creación de interfaces de usuario dinámicas, responsivas e interactivas implementando buenas prácticas de maquetación, diseño adaptable y consumo eficiente de servicios externos.",
+        "Backend y APIs: Diseño e implementación de arquitecturas basadas en APIs REST, manejo de lógica de negocio, autenticación, autorización y validación de datos.",
+        "Bases de Datos: Modelado conceptual y relacional de bases de datos, ejecución de consultas estructuradas, normalización y persistencia de datos.",
+        "Ciclo de vida de software: Integración de control de versiones con Git/GitHub, resolución sistemática de errores, pruebas y despliegue continuo en entornos de producción (Cloud/Hosting)."
+      ],
+      "download": "Descargar Certificado (PDF)"
+    }
+  },
+  "skills": {
+    "title": "Tecnologías y Lenguajes",
+    "frontend": "Frontend & Mobile",
+    "backend": "Backend & Bases de Datos",
+    "tools": "Otros Lenguajes y Herramientas",
+    "hardware": "Hardware/IoT"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "download": "Descargar Archivos del Proyecto (.zip)",
+    "visit": "Visitar Proyecto",
+    "item1": {
+      "title": "Chatterbot Conversacional",
+      "description": "Chatterbot con información sobre la obtención del carnet de conducir, utilizando la herramienta de desarrollo Lazarus, basada en el lenguaje de programación Object Pascal."
+    },
+    "item2": {
+      "title": "Simulación Consultorio Dentista",
+      "description": "Proyecto desarrollado en la herramienta de desarrollo Lazarus, basada en el lenguaje de programación Object Pascal. Permite agregar personas y sus respectivas consultas, permitiendo realizar diferentes estadísticas con dichos datos."
+    },
+    "item3": {
+      "title": "Gestión de Viajes Turísticos",
+      "description": "Proyecto realizado en VisualWorks (SmallTalk), dicho proyecto permite la creación y reservación de paquetes turísticos, además de disponer de distintas estadísticas basadas en los datos ingresados. Todos los datos son guardados en archivos locales."
+    },
+    "item4": {
+      "title": "GymMate - Ecosistema Multiplataforma para Gimnasios 🌟",
+      "status": "¡En Producción!",
+      "description": "Una solución integral SaaS (Software as a Service) actualmente en producción y siendo utilizada activamente por dos gimnasios. El proyecto está diseñado para la gestión total del establecimiento y la interacción directa con los clientes, destacando por su accesibilidad total al estar desplegado en Web, Android (PlayStore), iOS (Apple Store) y PC (Aplicación de Escritorio).",
+      "features": {
+        "f1": "Stack Moderno: Construido con React, TypeScript y Vite, estilizado con TailwindCSS.",
+        "f2": "Magia Multiplataforma: Implementación de Capacitor y Electron.",
+        "f3": "UX: Integración de escáner QR, gráficos interactivos y alertas dinámicas.",
+        "f4": "Backend Robusto: Node.js, Express, PostgreSQL con TypeORM, JWT.",
+        "f5": "Integraciones: MercadoPago, WhatsApp Bot, Firebase, Cloudinary."
+      }
+    }
+  }
+}
