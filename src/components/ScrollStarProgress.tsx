@@ -1,13 +1,21 @@
 import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Star } from 'lucide-react';
 
 const ScrollStarProgress: React.FC = () => {
   const { scrollYProgress } = useScroll();
 
-  // We map the scroll progress (0 to 1) to an array of stars
-  const numStars = 6;
-  const starsArray = Array.from({ length: numStars });
+  // Constellation points within a 100x400 viewBox
+  const points = [
+    { x: 50, y: 20 },
+    { x: 20, y: 92 },
+    { x: 80, y: 164 },
+    { x: 40, y: 236 },
+    { x: 90, y: 308 },
+    { x: 30, y: 380 }
+  ];
+
+  // SVG Path connecting the points
+  const pathString = `M ${points.map(p => `${p.x} ${p.y}`).join(' L ')}`;
 
   return (
     <div
@@ -16,61 +24,83 @@ const ScrollStarProgress: React.FC = () => {
         right: '20px',
         top: '50%',
         transform: 'translateY(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '20px',
+        width: '100px',
+        height: '400px',
         zIndex: 50,
+        pointerEvents: 'none',
       }}
     >
-      {starsArray.map((_, index) => {
-        // Calculate the range of scroll for this specific star to light up
-        const threshold = index / (numStars - 1);
+      <svg width="100" height="400" viewBox="0 0 100 400" style={{ overflow: 'visible' }}>
+        {/* Background dimmed line */}
+        <path
+          d={pathString}
+          fill="transparent"
+          stroke="rgba(255, 255, 255, 0.1)"
+          strokeWidth="1"
+        />
         
-        // When scroll reaches the threshold, color changes, glow appears
-        const glowOpacity = useTransform(
-          scrollYProgress,
-          [Math.max(0, threshold - 0.1), threshold],
-          [0, 1]
-        );
+        {/* Animated bright line drawing on scroll */}
+        <motion.path
+          d={pathString}
+          fill="transparent"
+          stroke="rgba(139, 92, 246, 0.8)" /* accent-purple */
+          strokeWidth="2"
+          style={{ pathLength: scrollYProgress }}
+        />
 
-        const color = useTransform(
-          scrollYProgress,
-          [Math.max(0, threshold - 0.1), threshold],
-          ['#475569', '#fcd34d'] // From slate-600 to amber-300
-        );
-        
-        const scale = useTransform(
-          scrollYProgress,
-          [Math.max(0, threshold - 0.1), threshold, Math.min(1, threshold + 0.1)],
-          [1, 1.3, 1]
-        );
+        {/* Constellation Stars */}
+        {points.map((p, index) => {
+          // Calculate when the scroll reaches this point (roughly)
+          const threshold = index / (points.length - 1);
+          
+          // Glow and size change as we scroll past the threshold
+          const opacity = useTransform(
+            scrollYProgress,
+            [Math.max(0, threshold - 0.1), threshold],
+            [0.3, 1]
+          );
 
-        return (
-          <motion.div
-            key={index}
-            style={{
-              position: 'relative',
-              scale,
-            }}
-          >
-            {/* Glow effect */}
-            <motion.div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                backgroundColor: '#fcd34d',
-                borderRadius: '50%',
-                filter: 'blur(8px)',
-                opacity: glowOpacity,
-              }}
-            />
-            {/* Star Icon */}
-            <motion.div style={{ color, position: 'relative', zIndex: 2 }}>
-              <Star size={24} fill="currentColor" strokeWidth={0} />
-            </motion.div>
-          </motion.div>
-        );
-      })}
+          const scale = useTransform(
+            scrollYProgress,
+            [Math.max(0, threshold - 0.1), threshold, Math.min(1, threshold + 0.1)],
+            [1, 1.5, 1.2]
+          );
+
+          const glowOpacity = useTransform(
+            scrollYProgress,
+            [Math.max(0, threshold - 0.1), threshold],
+            [0, 0.8]
+          );
+
+          return (
+            <g key={index} transform={`translate(${p.x}, ${p.y})`}>
+              {/* Outer Glow */}
+              <motion.circle
+                r="6"
+                fill="rgba(252, 211, 77, 0.6)" /* Amber-300 with opacity */
+                style={{ opacity: glowOpacity, scale, filter: 'blur(3px)' }}
+              />
+              
+              {/* Inner Core (Real Star Look) */}
+              <motion.circle
+                r="2.5"
+                fill="#ffffff"
+                style={{ opacity, scale }}
+              />
+
+              {/* Flare effect for brighter stars */}
+              {index % 2 === 0 && (
+                <motion.path
+                  d="M -6 0 L 6 0 M 0 -6 L 0 6"
+                  stroke="#ffffff"
+                  strokeWidth="0.5"
+                  style={{ opacity: glowOpacity }}
+                />
+              )}
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 };

@@ -11,7 +11,10 @@ const StarfieldBackground: React.FC = () => {
     if (!ctx) return;
 
     let animationFrameId: number;
-    let stars: { x: number; y: number; radius: number; vx: number; vy: number; alpha: number; decrease: boolean }[] = [];
+    let stars: { x: number; y: number; radius: number; vx: number; vy: number; alpha: number; twinkleSpeed: number, color: string }[] = [];
+    let meteors: { x: number; y: number; length: number; speed: number; angle: number; opacity: number }[] = [];
+
+    const colors = ['#ffffff', '#e2f2ff', '#fff3e2', '#f0e6ff']; // Real star hues
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -21,46 +24,107 @@ const StarfieldBackground: React.FC = () => {
 
     const initStars = () => {
       stars = [];
-      const numStars = Math.floor((canvas.width * canvas.height) / 2000); // Responsive amount of stars
+      const numStars = Math.floor((canvas.width * canvas.height) / 1500); 
       for (let i = 0; i < numStars; i++) {
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          radius: Math.random() * 1.5,
-          vx: Math.floor(Math.random() * 50) - 25,
-          vy: Math.floor(Math.random() * 50) - 25,
+          radius: Math.random() * 1.2 + 0.2, // Smaller, more realistic sizes
+          vx: Math.random() * 0.1 + 0.05, // Drift right
+          vy: Math.random() * 0.1 + 0.05, // Drift down
           alpha: Math.random(),
-          decrease: Math.random() > 0.5,
+          twinkleSpeed: (Math.random() * 0.01) + 0.005,
+          color: colors[Math.floor(Math.random() * colors.length)],
+        });
+      }
+    };
+
+    const spawnMeteor = () => {
+      // 1.5% chance per frame to spawn a meteor (creates a subtle meteor shower)
+      if (Math.random() < 0.015) { 
+        meteors.push({
+          x: Math.random() * canvas.width * 1.5 - canvas.width * 0.5, 
+          y: Math.random() * -200, // Spawn above the screen
+          length: Math.random() * 100 + 40,
+          speed: Math.random() * 15 + 10, // Fast movement
+          angle: Math.PI / 4 + (Math.random() * 0.1 - 0.05), // ~45 degrees right-down
+          opacity: 1
         });
       }
     };
 
     const drawStars = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ffffff';
 
+      // Draw standard stars
       for (let i = 0; i < stars.length; i++) {
         const s = stars[i];
+        
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
-        ctx.globalAlpha = s.alpha;
-        ctx.fill();
-
+        ctx.fillStyle = s.color;
+        
         // Twinkle effect
-        if (s.decrease) {
-          s.alpha -= 0.01;
-          if (s.alpha <= 0.1) s.decrease = false;
+        s.alpha += s.twinkleSpeed;
+        if (s.alpha <= 0.1 || s.alpha >= 1) {
+          s.twinkleSpeed = -s.twinkleSpeed;
+        }
+        
+        // Dynamic glow for slightly bigger stars
+        if (s.radius > 1) {
+           ctx.shadowBlur = 5;
+           ctx.shadowColor = s.color;
         } else {
-          s.alpha += 0.01;
-          if (s.alpha >= 1) s.decrease = true;
+           ctx.shadowBlur = 0;
         }
 
-        // Slight movement
-        s.x += s.vx / 100;
-        s.y += s.vy / 100;
+        ctx.globalAlpha = Math.max(0, Math.min(1, s.alpha));
+        ctx.fill();
 
-        if (s.x < 0 || s.x > canvas.width) s.vx = -s.vx;
-        if (s.y < 0 || s.y > canvas.height) s.vy = -s.vy;
+        // Slow movement (Left to Right, Top to Bottom)
+        s.x += s.vx;
+        s.y += s.vy;
+
+        // Wrap around seamlessly
+        if (s.x > canvas.width) s.x = 0;
+        if (s.y > canvas.height) s.y = 0;
+      }
+      
+      ctx.shadowBlur = 0; // Reset shadow for meteors
+
+      // Draw meteors
+      spawnMeteor();
+      for (let i = meteors.length - 1; i >= 0; i--) {
+        const m = meteors[i];
+        
+        // Update position
+        m.x += Math.cos(m.angle) * m.speed;
+        m.y += Math.sin(m.angle) * m.speed;
+        m.opacity -= 0.012; // Fade out as it falls
+        
+        if (m.opacity <= 0) {
+          meteors.splice(i, 1);
+          continue;
+        }
+
+        // Draw meteor trail
+        const gradient = ctx.createLinearGradient(
+          m.x, m.y, 
+          m.x - Math.cos(m.angle) * m.length, 
+          m.y - Math.sin(m.angle) * m.length
+        );
+        gradient.addColorStop(0, `rgba(255, 255, 255, ${m.opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+        ctx.beginPath();
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(
+          m.x - Math.cos(m.angle) * m.length, 
+          m.y - Math.sin(m.angle) * m.length
+        );
+        ctx.strokeStyle = gradient;
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
       }
 
       animationFrameId = requestAnimationFrame(drawStars);
