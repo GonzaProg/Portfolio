@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Globe, Menu, X } from 'lucide-react';
+import { Globe } from 'lucide-react';
 
 const Navbar: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,23 +28,19 @@ const Navbar: React.FC = () => {
         width: '100%',
         padding: isScrolled ? '15px 0' : '25px 0',
         transition: 'all 0.3s ease',
-        background: isScrolled ? 'var(--glass-bg)' : 'transparent',
+        background: isScrolled ? 'rgba(10, 12, 22, 0.2)' : 'transparent',
         backdropFilter: isScrolled ? 'blur(12px)' : 'none',
-        borderBottom: isScrolled ? '1px solid var(--glass-border)' : '1px solid transparent',
+        borderBottom: isScrolled ? '1px solid rgba(255, 255, 255, 0.03)' : '1px solid transparent',
         zIndex: 100,
       }}
     >
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href="#hero" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-heading)' }}>
+        <a href="#about" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-heading)' }}>
           GV<span className="text-gradient">.</span>
         </a>
 
-        {/* Desktop Menu */}
-        <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }} className="desktop-nav">
-          <a href="#about" style={{ color: '#fff', fontWeight: 500 }}>{t('nav.about')}</a>
-          <a href="#education" style={{ color: '#fff', fontWeight: 500 }}>{t('nav.education')}</a>
-          <a href="#skills" style={{ color: '#fff', fontWeight: 500 }}>{t('nav.skills')}</a>
-          <a href="#projects" style={{ color: '#fff', fontWeight: 500 }}>{t('nav.projects')}</a>
+        {/* Desktop Menu - Nav links moved to constellation */}
+        <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
           
           <button 
             onClick={toggleLanguage}
@@ -66,14 +61,7 @@ const Navbar: React.FC = () => {
             <span>{i18n.language.toUpperCase()}</span>
           </button>
         </div>
-
-        {/* Mobile Menu Toggle (simplified for this example, logic can be extended) */}
-        <div className="mobile-nav-toggle" style={{ display: 'none', cursor: 'pointer' }} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          {isMobileMenuOpen ? <X color="#fff" /> : <Menu color="#fff" />}
-        </div>
       </div>
-      
-      {/* We would add basic CSS in index.css to handle desktop-nav and mobile-nav-toggle display states */}
     </nav>
   );
 };
