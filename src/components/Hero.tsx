@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import ElectricBorder from './ElectricBorder';
+import ElectricBorder from '../animations/ElectricBorder';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
