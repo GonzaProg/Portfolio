@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
+import ElectricBorder from './ElectricBorder';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -51,24 +52,30 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           style={{ flex: '1 1 300px', display: 'flex', justifyContent: 'center' }}
         >
-          <div style={{
-            width: '300px',
-            height: '300px',
-            borderRadius: '50%',
-            background: 'var(--glass-bg)',
-            border: '2px solid var(--glass-border)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            boxShadow: '0 0 40px var(--accent-glow)',
-            overflow: 'hidden',
-            position: 'relative'
-          }}>
-            {/* Placeholder for the user's image */}
-            <span style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px' }}>
-              Espacio para imagen<br/>(Subir luego)
-            </span>
-          </div>
+          <ElectricBorder
+            color="#8b5cf6"
+            speed={1}
+            chaos={0.12}
+            borderRadius={150}
+            style={{ borderRadius: '50%', width: '300px', height: '300px' }}
+          >
+            <div style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              background: 'var(--glass-bg)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+              position: 'relative'
+            }}>
+              {/* Placeholder for the user's image */}
+              <span style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px' }}>
+                Espacio para imagen<br/>(Subir luego)
+              </span>
+            </div>
+          </ElectricBorder>
         </motion.div>
 
       </div>
