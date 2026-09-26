@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import Estrella from '../assets/Estrella.png';
 
 const TypewriterText = ({ text, isHovered }: { text: string; isHovered: boolean }) => {
   const containerVariants = {
@@ -164,23 +165,31 @@ const ScrollStarProgress: React.FC = () => {
 
           return (
             <g key={index} transform={`translate(${p.x}, ${p.y})`}>
+              {/* Efecto de luminiscencia (Glow) */}
               <motion.circle
-                r="6"
+                r="14"
                 fill="rgba(252, 211, 77, 0.6)"
-                style={{ opacity: isHovered ? 1 : glowOpacity, scale: isHovered ? 1.5 : scale, filter: 'blur(3px)', transition: 'all 0.3s ease' }}
+                style={{ 
+                  opacity: isHovered ? 1 : glowOpacity, 
+                  scale: isHovered ? 1.5 : scale, 
+                  filter: 'blur(6px)', 
+                  transition: 'all 0.3s ease' 
+                }}
               />
               
-              <motion.circle
-                r="2.5"
-                fill="#ffffff"
-                style={{ opacity: isHovered ? 1 : opacity, scale: isHovered ? 1.5 : scale, transition: 'all 0.3s ease' }}
-              />
-
-              <motion.path
-                d="M -6 0 L 6 0 M 0 -6 L 0 6"
-                stroke="#ffffff"
-                strokeWidth="0.5"
-                style={{ opacity: isHovered ? 1 : glowOpacity, transition: 'all 0.3s ease' }}
+              {/* Imagen de la estrella */}
+              <motion.image
+                href={Estrella}
+                x="-12"
+                y="-12"
+                width="24"
+                height="24"
+                style={{ 
+                  opacity: isHovered ? 1 : opacity, 
+                  scale: isHovered ? 1.5 : scale, 
+                  transition: 'all 0.3s ease',
+                  filter: 'drop-shadow(0 0 5px rgba(252,211,77,0.8))'
+                }}
               />
             </g>
           );
