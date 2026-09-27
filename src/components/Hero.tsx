@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import ElectricBorder from '../animations/ElectricBorder';
 import SpecularButton from '../animations/SpecularButton';
+import miCara from '../assets/MiCara.jpeg';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -77,10 +78,8 @@ const Hero: React.FC = () => {
               overflow: 'hidden',
               position: 'relative'
             }}>
-              {/* Placeholder for the user's image */}
-              <span style={{ color: 'var(--text-muted)', textAlign: 'center', padding: '20px' }}>
-                Espacio para imagen<br/>(Subir luego)
-              </span>
+              {/* User Image */}
+              <img src={miCara} alt="Gonzalo Vaschchuk" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
           </ElectricBorder>
         </motion.div>

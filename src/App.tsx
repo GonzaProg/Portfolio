@@ -1,5 +1,5 @@
 
-import StarfieldBackground from './components/StarfieldBackground';
+import Lightfall from './animations/Lightfall';
 import ScrollStarProgress from './components/ScrollStarProgress';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -13,7 +13,25 @@ import './App.css';
 function App() {
   return (
     <>
-      <StarfieldBackground />
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1 }}>
+        <Lightfall
+          colors={['#8b5cf6', '#3b82f6', '#FF9FFC']} // Accent Purple, Accent Blue, and a lighter pink
+          backgroundColor="#06070d" // --space-darker
+          speed={0.6}
+          streakCount={1}
+          streakWidth={1}
+          streakLength={1.5}
+          glow={1}
+          density={0.5}
+          twinkle={1}
+          zoom={2}
+          backgroundGlow={0.8}
+          opacity={1}
+          mouseInteraction={true}
+          mouseStrength={1}
+          mouseRadius={0.6}
+        />
+      </div>
       <ScrollStarProgress />
       <Navbar />
       

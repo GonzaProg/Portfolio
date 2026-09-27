@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
+import gvLogo from '../assets/GV.png';
 
 const Navbar: React.FC = () => {
   const { i18n } = useTranslation();
@@ -36,8 +37,8 @@ const Navbar: React.FC = () => {
       }}
     >
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href="#about" style={{ fontSize: '1.5rem', fontWeight: 800, color: '#fff', fontFamily: 'var(--font-heading)' }}>
-          GV<span className="text-gradient">.</span>
+        <a href="#about" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src={gvLogo} alt="GV Logo" style={{ height: '40px', objectFit: 'contain' }} />
         </a>
 
         {/* Desktop Menu - Nav links moved to constellation */}
