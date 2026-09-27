@@ -26,7 +26,7 @@ const TypewriterText = ({ text, isHovered }: { text: string; isHovered: boolean 
       animate="visible"
       style={{
         position: 'absolute',
-        right: '40px',
+        right: '65px',
         top: '3px',
         whiteSpace: 'nowrap',
         color: '#fff',
@@ -51,21 +51,23 @@ const ScrollStarProgress: React.FC = () => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   
   // Real layout scroll thresholds (0 to 1) for the sections
-  const [thresholds, setThresholds] = useState<number[]>([0, 0.33, 0.66, 1]);
+  const [thresholds, setThresholds] = useState<number[]>([0, 0.25, 0.5, 0.75, 1]);
 
   const sections = [
     { id: 'about', key: 'nav.about', x: 70, y: 30 },
     { id: 'education', key: 'nav.education', x: 20, y: 130 },
     { id: 'skills', key: 'nav.skills', x: 80, y: 250 },
-    { id: 'projects', key: 'nav.projects', x: 30, y: 360 }
+    { id: 'projects', key: 'nav.projects', x: 30, y: 360 },
+    { id: 'contact', key: 'nav.contact', x: 70, y: 470 }
   ];
 
   // SVG milestones based on exact line lengths between points
   // 1: (70, 30) -> 2: (20, 130) = dist 111.8
   // 2: (20, 130) -> 3: (80, 250) = dist 134.16
   // 3: (80, 250) -> 4: (30, 360) = dist 120.83
-  // Total = 366.79
-  const svgMilestones = [0, 0.304, 0.670, 1];
+  // 4: (30, 360) -> 5: (70, 470) = dist 117.05
+  // Total = 483.84
+  const svgMilestones = [0, 0.231, 0.508, 0.758, 1];
 
   useEffect(() => {
     const calculateThresholds = () => {
@@ -120,11 +122,11 @@ const ScrollStarProgress: React.FC = () => {
         top: '50%',
         transform: 'translateY(-50%)',
         width: '100px',
-        height: '400px',
+        height: '500px',
         zIndex: 50,
       }}
     >
-      <svg width="100" height="400" viewBox="0 0 100 400" style={{ overflow: 'visible', pointerEvents: 'none' }}>
+      <svg width="100" height="500" viewBox="0 0 100 500" style={{ overflow: 'visible', pointerEvents: 'none' }}>
         <path
           d={pathString}
           fill="transparent"

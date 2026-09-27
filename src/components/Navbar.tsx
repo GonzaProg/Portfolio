@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
+import { GithubIcon, LinkedinIcon } from './SocialIcons';
 
 const Navbar: React.FC = () => {
   const { i18n } = useTranslation();
@@ -40,8 +41,31 @@ const Navbar: React.FC = () => {
         </a>
 
         {/* Desktop Menu - Nav links moved to constellation */}
-        <div style={{ display: 'flex', gap: '30px', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center', marginRight: '10px' }}>
+            <a 
+              href="https://github.com/GonzaProg" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: 'var(--text-muted)', transition: 'color 0.3s ease', display: 'flex', alignItems: 'center' }}
+              onMouseOver={(e) => { e.currentTarget.style.color = '#fff' }}
+              onMouseOut={(e) => { e.currentTarget.style.color = 'var(--text-muted)' }}
+            >
+              <GithubIcon size={22} />
+            </a>
+            <a 
+              href="https://www.linkedin.com/in/gonzalo-vaschchuk-a4b4033a7/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              style={{ color: 'var(--text-muted)', transition: 'color 0.3s ease', display: 'flex', alignItems: 'center' }}
+              onMouseOver={(e) => { e.currentTarget.style.color = '#fff' }}
+              onMouseOut={(e) => { e.currentTarget.style.color = 'var(--text-muted)' }}
+            >
+              <LinkedinIcon size={22} />
+            </a>
+          </div>
+
           <button 
             onClick={toggleLanguage}
             style={{

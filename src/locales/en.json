@@ -3,13 +3,14 @@
     "about": "About",
     "education": "Education",
     "skills": "Skills",
-    "projects": "Projects"
+    "projects": "Projects",
+    "contact": "Contact"
   },
   "hero": {
     "greeting": "Hi, I'm",
     "name": "Gonzalo",
-    "role": "Developer & Engineering Student",
-    "description": "I am 24 years old, currently a student and soon to be an Information Systems Engineer. Passionate about technology and programming with a desire to keep learning and creating innovative solutions.",
+    "role": "Full-Stack Developer & aspiring Systems Engineer",
+    "description": "I am a 24-year-old senior Information Systems Engineering student driven by curiosity and a genuine passion for tech and software development. Proactive and solution-oriented, I’m always eager to keep learning, build innovative software, and take on new professional challenges",
     "contact": "Contact"
   },
   "education": {
@@ -75,5 +76,14 @@
         "f5": "Integrations: MercadoPago, WhatsApp Bot, Firebase, Cloudinary."
       }
     }
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Send me a message and I'll get back to you shortly.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "whatsapp": "Message me on WhatsApp"
   }
 }

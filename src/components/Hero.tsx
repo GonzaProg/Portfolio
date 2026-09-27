@@ -2,6 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import ElectricBorder from '../animations/ElectricBorder';
+import SpecularButton from '../animations/SpecularButton';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
@@ -27,23 +28,29 @@ const Hero: React.FC = () => {
             {t('hero.description')}
           </p>
           
-          <a 
-            href="mailto:gonvasch@gmail.com" 
-            style={{
-              display: 'inline-block',
-              background: 'linear-gradient(135deg, var(--accent-blue), var(--accent-purple))',
-              color: '#fff',
-              padding: '12px 32px',
-              borderRadius: '30px',
-              fontWeight: 600,
-              boxShadow: '0 4px 15px var(--accent-glow)',
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-            }}
-            onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 6px 20px rgba(139, 92, 246, 0.6)'; }}
-            onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px var(--accent-glow)'; }}
-          >
-            {t('hero.contact')}
-          </a>
+          <div style={{ display: 'inline-block' }}>
+            <SpecularButton
+              size="lg"
+              radius={30}
+              tint="#8b5cf6"
+              tintOpacity={0.15}
+              blur={0}
+              textColor="#f5f5f5"
+              lineColor="#ffffff"
+              baseColor="#8b5cf6"
+              intensity={2.5}
+              shineSize={20}
+              shineFade={60}
+              thickness={4}
+              speed={0.4}
+              followMouse
+              proximity={300}
+              autoAnimate={true}
+              onClick={() => { window.location.hash = '#contact'; }}
+            >
+              {t('hero.contact')}
+            </SpecularButton>
+          </div>
         </motion.div>
 
         <motion.div 

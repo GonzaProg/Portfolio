@@ -3,13 +3,14 @@
     "about": "Sobre Mí",
     "education": "Estudios",
     "skills": "Tecnologías",
-    "projects": "Proyectos"
+    "projects": "Proyectos",
+    "contact": "Consultas"
   },
   "hero": {
     "greeting": "Hola soy",
     "name": "Gonzalo",
-    "role": "Desarrollador & Estudiante de Ingeniería",
-    "description": "Tengo 24 años, actualmente estudiante y próximo a ser Ingeniero en Sistemas de Información. Apasionado a la tecnología y la programación con ganas de seguir aprendiendo y crear soluciones innovadoras.",
+    "role": "Desarrollador Full Stack & Próximo Ingeniero en Sistemas",
+    "description": "Tengo 24 años, actualmente estudiante avanzado de la carrera de Ingeniería en Sistemas de Información. Me considero una persona proactiva, curiosa y apasionada por la tecnología y la programación, siempre con ganas de seguir aprendiendo, creando soluciones innovadoras y creciendo profesionalmente.",
     "contact": "Contacto"
   },
   "education": {
@@ -75,5 +76,14 @@
         "f5": "Integraciones: MercadoPago, WhatsApp Bot, Firebase, Cloudinary."
       }
     }
+  },
+  "contact": {
+    "title": "Consultas",
+    "description": "Envíame un mensaje y me pondré en contacto contigo a la brevedad.",
+    "name": "Nombre",
+    "email": "Correo Electrónico",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "whatsapp": "Enviar mensaje por WhatsApp"
   }
 }
