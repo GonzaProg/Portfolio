@@ -4,12 +4,13 @@ import { motion } from 'framer-motion';
 import ElectricBorder from '../animations/ElectricBorder';
 import SpecularButton from '../animations/SpecularButton';
 import miCara from '../assets/MiCara.jpeg';
+import fondoNombre from '../assets/FondoNombre.jpg';
 
 const Hero: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="about" className="section" style={{ minHeight: '100vh', position: 'relative' }}>
+    <section id="about" className="section" style={{ minHeight: '100vh', position: 'relative', paddingTop: '120px' }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', flexWrap: 'wrap' }}>
         
         <motion.div 
@@ -22,10 +23,22 @@ const Hero: React.FC = () => {
             {t('hero.greeting')}
           </h2>
           <h1 style={{ fontSize: '4rem', marginBottom: '20px', lineHeight: 1.1 }}>
-            {t('hero.name')}<br/>
+            <span style={{
+              backgroundImage: `url(${fondoNombre})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              color: 'transparent',
+              WebkitTextStroke: '2px var(--accent-purple)',
+              filter: 'drop-shadow(0 0 10px var(--accent-purple))'
+            }}>
+              {t('hero.name')}
+            </span><br/>
             <span className="text-gradient" style={{ fontSize: '2.5rem' }}>{t('hero.role')}</span>
           </h1>
-          <p style={{ fontSize: '1.1rem', color: 'var(--text-muted)', marginBottom: '30px', maxWidth: '600px' }}>
+          <p style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '30px', maxWidth: '600px' }}>
             {t('hero.description')}
           </p>
           

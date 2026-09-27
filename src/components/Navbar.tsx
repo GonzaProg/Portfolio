@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Globe } from 'lucide-react';
 import { GithubIcon, LinkedinIcon } from './SocialIcons';
 import gvLogo from '../assets/GV.png';
+import { motion } from 'framer-motion';
 
 const Navbar: React.FC = () => {
   const { i18n } = useTranslation();
@@ -67,8 +68,10 @@ const Navbar: React.FC = () => {
             </a>
           </div>
 
-          <button 
+          <motion.button 
             onClick={toggleLanguage}
+            animate={{ rotateY: i18n.language === 'es' ? 0 : 360 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -84,7 +87,7 @@ const Navbar: React.FC = () => {
           >
             <Globe size={18} />
             <span>{i18n.language.toUpperCase()}</span>
-          </button>
+          </motion.button>
         </div>
       </div>
     </nav>

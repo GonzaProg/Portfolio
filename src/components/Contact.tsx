@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Send } from 'lucide-react';
 import { MagicCard, MagicCardContainer } from '../animations/MagicCard';
@@ -11,6 +11,33 @@ const WhatsAppLogo = ({ size = 24 }) => (
 
 const Contact: React.FC = () => {
   const { t } = useTranslation();
+  const [status, setStatus] = useState<string>('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    
+    try {
+      const response = await fetch(form.action, {
+        method: form.method,
+        body: data,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+      
+      if (response.ok) {
+        setStatus('¡Gracias! El formulario ha sido enviado con éxito');
+        form.reset();
+        setTimeout(() => setStatus(''), 5000);
+      } else {
+        setStatus('Oops! Hubo un problema al enviar tu mensaje.');
+      }
+    } catch (error) {
+      setStatus('Oops! Hubo un problema al enviar tu mensaje.');
+    }
+  };
 
   return (
     <section id="contact" className="section container">
@@ -35,7 +62,7 @@ const Contact: React.FC = () => {
               {t('contact.description')}
             </p>
 
-            <form action="https://formspree.io/f/mrpbyjny" method="POST" style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'relative', zIndex: 10 }}>
+            <form action="https://formspree.io/f/mrpbyjny" method="POST" onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'relative', zIndex: 10 }}>
               <div>
                 <label htmlFor="name" style={{ display: 'block', marginBottom: '8px', color: 'var(--text-main)', fontSize: '0.95rem' }}>{t('contact.name')}</label>
                 <input 
@@ -130,6 +157,12 @@ const Contact: React.FC = () => {
                 <Send size={18} />
                 {t('contact.send')}
               </button>
+              
+              {status && (
+                <div style={{ color: '#25D366', marginTop: '10px', fontSize: '0.95rem', fontWeight: 500, textAlign: 'center' }}>
+                  {status}
+                </div>
+              )}
             </form>
           </MagicCard>
 
