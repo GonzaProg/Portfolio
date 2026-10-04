@@ -120,7 +120,13 @@ const SpecularButton: React.FC<SpecularButtonProps> = ({
     const fx = fxRef.current;
     if (!btn || !fx) return;
 
-    const dpr = window.devicePixelRatio || 1;
+    let isVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+    });
+    observer.observe(btn);
+
+    const dpr = 1; // Capped at 1 for performance
     const renderer = new Renderer({ alpha: true, premultipliedAlpha: true, antialias: true, dpr });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -201,6 +207,10 @@ const SpecularButton: React.FC<SpecularButtonProps> = ({
 
     const update = (now: number) => {
       raf = requestAnimationFrame(update);
+      if (!isVisible) {
+        last = now;
+        return;
+      }
       const dt = Math.min((now - last) / 1000, 0.05);
       last = now;
       const p = propsRef.current;
@@ -231,6 +241,7 @@ const SpecularButton: React.FC<SpecularButtonProps> = ({
     return () => {
       cancelAnimationFrame(raf);
       ro.disconnect();
+      observer.disconnect();
       window.removeEventListener('pointermove', onPointerMove);
       if (gl.canvas.parentNode === fx) fx.removeChild(gl.canvas);
       // @ts-ignore

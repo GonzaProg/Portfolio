@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
               position: 'relative'
             }}>
               {/* User Image */}
-              <img src={miCara} alt="Gonzalo Vaschchuk" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={miCara} alt="Gonzalo Vaschchuk" style={{ width: '90%', height: '90%', objectFit: 'cover' }} />
             </div>
           </ElectricBorder>
         </motion.div>

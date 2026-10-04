@@ -23,6 +23,7 @@ function App() {
           streakLength={1.5}
           glow={1}
           density={0.5}
+          dpr={1}
           twinkle={1}
           zoom={2}
           backgroundGlow={0.8}

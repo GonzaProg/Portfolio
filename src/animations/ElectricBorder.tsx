@@ -169,8 +169,8 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
       const width = rect.width + borderOffset * 2;
       const height = rect.height + borderOffset * 2;
 
-      // Use device pixel ratio for sharp rendering
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Use device pixel ratio for sharp rendering (Capped at 1 for performance)
+      const dpr = 1;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       canvas.style.width = `${width}px`;
@@ -181,12 +181,23 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
     };
 
     let { width, height } = updateSize();
-    let lastDpr = Math.min(window.devicePixelRatio || 1, 2);
+    let lastDpr = 1;
+
+    let isVisible = true;
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      isVisible = entries[0].isIntersecting;
+    });
+    intersectionObserver.observe(container);
 
     const drawElectricBorder = (currentTime: number) => {
-      if (!canvas || !ctx) return;
+      animationRef.current = requestAnimationFrame(drawElectricBorder);
+      
+      if (!canvas || !ctx || !isVisible) {
+        lastFrameTimeRef.current = currentTime;
+        return;
+      }
 
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = 1;
       if (dpr !== lastDpr) {
         lastDpr = dpr;
         const newSize = updateSize();
@@ -208,12 +219,13 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
       ctx.lineJoin = 'round';
 
       const scale = displacement;
-      const left = borderOffset;
-      const top = borderOffset;
-      const borderWidth = width - 2 * borderOffset;
-      const borderHeight = height - 2 * borderOffset;
+      const outset = 15; // Push the path outwards so the erratic line doesn't overlap the image
+      const left = borderOffset - outset;
+      const top = borderOffset - outset;
+      const borderWidth = width - 2 * borderOffset + outset * 2;
+      const borderHeight = height - 2 * borderOffset + outset * 2;
       const maxRadius = Math.min(borderWidth, borderHeight) / 2;
-      const radius = Math.min(borderRadius, maxRadius);
+      const radius = Math.min(borderRadius + outset, maxRadius);
 
       const approximatePerimeter = 2 * (borderWidth + borderHeight) + 2 * Math.PI * radius;
       const sampleCount = Math.floor(approximatePerimeter / 2);
@@ -261,8 +273,6 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
 
       ctx.closePath();
       ctx.stroke();
-
-      animationRef.current = requestAnimationFrame(drawElectricBorder);
     };
 
     // Handle resize
@@ -281,6 +291,7 @@ const ElectricBorder: React.FC<ElectricBorderProps> = ({
         cancelAnimationFrame(animationRef.current);
       }
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
     };
   }, [color, speed, chaos, borderRadius, octavedNoise, getRoundedRectPoint]);
 

@@ -95,12 +95,27 @@ export const GlobalSpotlight = ({
     document.body.appendChild(spotlight);
     spotlightRef.current = spotlight;
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!spotlightRef.current || !containerRef.current) return;
+    let isContainerVisible = true;
+    const observer = new IntersectionObserver((entries) => {
+      isContainerVisible = entries[0].isIntersecting;
+    });
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    let rafId: number | null = null;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const updateSpotlight = () => {
+      if (!spotlightRef.current || !containerRef.current) {
+        rafId = null;
+        return;
+      }
 
       const rect = containerRef.current.getBoundingClientRect();
       const mouseInside =
-        e.clientX >= rect.left && e.clientX <= rect.right && e.clientY >= rect.top && e.clientY <= rect.bottom;
+        mouseX >= rect.left && mouseX <= rect.right && mouseY >= rect.top && mouseY <= rect.bottom;
 
       const cards = containerRef.current.querySelectorAll('.magic-bento-card');
 
@@ -118,7 +133,7 @@ export const GlobalSpotlight = ({
         const cardRect = cardElement.getBoundingClientRect();
         const centerX = cardRect.left + cardRect.width / 2;
         const centerY = cardRect.top + cardRect.height / 2;
-        const distance = Math.hypot(e.clientX - centerX, e.clientY - centerY) - Math.max(cardRect.width, cardRect.height) / 2;
+        const distance = Math.hypot(mouseX - centerX, mouseY - centerY) - Math.max(cardRect.width, cardRect.height) / 2;
         const effectiveDistance = Math.max(0, distance);
 
         minDistance = Math.min(minDistance, effectiveDistance);
@@ -127,12 +142,12 @@ export const GlobalSpotlight = ({
         if (effectiveDistance <= proximity) glowIntensity = 1;
         else if (effectiveDistance <= fadeDistance) glowIntensity = (fadeDistance - effectiveDistance) / (fadeDistance - proximity);
 
-        updateCardGlowProperties(cardElement, e.clientX, e.clientY, glowIntensity, spotlightRadius);
+        updateCardGlowProperties(cardElement, mouseX, mouseY, glowIntensity, spotlightRadius);
       });
 
       gsap.to(spotlightRef.current, {
-        left: e.clientX,
-        top: e.clientY,
+        left: mouseX,
+        top: mouseY,
         duration: 0.1,
         ease: 'power2.out'
       });
@@ -145,6 +160,17 @@ export const GlobalSpotlight = ({
         duration: targetOpacity > 0 ? 0.2 : 0.5,
         ease: 'power2.out'
       });
+
+      rafId = null;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isContainerVisible) return;
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!rafId) {
+        rafId = requestAnimationFrame(updateSpotlight);
+      }
     };
 
     const handleMouseLeave = () => {
@@ -162,6 +188,8 @@ export const GlobalSpotlight = ({
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseleave', handleMouseLeave);
+      if (rafId) cancelAnimationFrame(rafId);
+      observer.disconnect();
       if (spotlightRef.current?.parentNode) {
         spotlightRef.current.parentNode.removeChild(spotlightRef.current);
       }
@@ -327,12 +355,19 @@ export const MagicCard = React.forwardRef<HTMLDivElement, MagicCardProps>(({
       }
     };
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!enableTilt && !enableMagnetism) return;
+    let cardRafId: number | null = null;
+    let cardMouseX = 0;
+    let cardMouseY = 0;
+
+    const updateCardAnimation = () => {
+      if (!enableTilt && !enableMagnetism) {
+        cardRafId = null;
+        return;
+      }
 
       const rect = element.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x = cardMouseX - rect.left;
+      const y = cardMouseY - rect.top;
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
@@ -359,6 +394,15 @@ export const MagicCard = React.forwardRef<HTMLDivElement, MagicCardProps>(({
           duration: 0.3,
           ease: 'power2.out'
         });
+      }
+      cardRafId = null;
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      cardMouseX = e.clientX;
+      cardMouseY = e.clientY;
+      if (!cardRafId) {
+        cardRafId = requestAnimationFrame(updateCardAnimation);
       }
     };
 
@@ -415,6 +459,7 @@ export const MagicCard = React.forwardRef<HTMLDivElement, MagicCardProps>(({
       element.removeEventListener('mouseleave', handleMouseLeave);
       element.removeEventListener('mousemove', handleMouseMove);
       element.removeEventListener('click', handleClick);
+      if (cardRafId) cancelAnimationFrame(cardRafId);
       clearAllParticles();
     };
   }, [animateParticles, clearAllParticles, disableAnimations, enableTilt, enableMagnetism, clickEffect, glowColor, cardRef]);
