@@ -32,7 +32,7 @@ const Skills: React.FC = () => {
       <div style={{ display: 'flex', flexWrap: 'wrap-reverse', gap: '40px', alignItems: 'center' }}>
         
         {/* Lado izquierdo: Grilla 2x2 */}
-        <div style={{ flex: '1 1 500px' }}>
+        <div style={{ flex: '1 1 min(100%, 500px)' }}>
           <MagicCardContainer>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
               {skillCategories.map((category, index) => (
@@ -63,7 +63,7 @@ const Skills: React.FC = () => {
         </div>
 
         {/* Lado derecho: Órbita (Sistema Solar) */}
-        <div style={{ flex: '1 1 400px', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', aspectRatio: '1 / 1', maxWidth: '500px', margin: '0 auto' }}>
+        <div style={{ flex: '1 1 min(100%, 400px)', display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative', aspectRatio: '1 / 1', maxWidth: '100%', margin: '0 auto' }}>
           
           {/* Órbita exterior (7 imágenes) */}
           <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}>

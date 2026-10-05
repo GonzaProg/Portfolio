@@ -115,17 +115,7 @@ const ScrollStarProgress: React.FC = () => {
   const pathString = `M ${sections.map(p => `${p.x} ${p.y}`).join(' L ')}`;
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        right: '20px',
-        top: '50%',
-        transform: 'translateY(-50%)',
-        width: '100px',
-        height: '500px',
-        zIndex: 50,
-      }}
-    >
+    <div className="scroll-star-container">
       <svg width="100" height="500" viewBox="0 0 100 500" style={{ overflow: 'visible', pointerEvents: 'none' }}>
         <path
           d={pathString}

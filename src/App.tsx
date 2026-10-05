@@ -13,7 +13,7 @@ import './App.css';
 function App() {
   return (
     <>
-      <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1 }}>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: -1 }}>
         <Lightfall
           colors={['#8b5cf6', '#3b82f6', '#FF9FFC']} // Accent Purple, Accent Blue, and a lighter pink
           backgroundColor="#06070d" // --space-darker

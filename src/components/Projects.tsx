@@ -33,13 +33,10 @@ const Projects: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="glass-panel"
+                className="glass-panel project-card"
                 style={{
-                  padding: '40px',
                   border: isFeatured ? '1px solid var(--accent-purple)' : '1px solid var(--glass-border)',
                   boxShadow: isFeatured ? '0 10px 40px rgba(139, 92, 246, 0.15)' : 'none',
-                  position: 'relative',
-                  overflow: 'hidden'
                 }}
               >
                 {isFeatured && (

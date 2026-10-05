@@ -52,8 +52,8 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="glass-panel"
-            style={{ padding: '40px', position: 'relative', overflow: 'hidden' }}
+            className="glass-panel project-card"
+            style={{ position: 'relative', overflow: 'hidden' }}
           >
             <h3 style={{ fontSize: '1.5rem', marginBottom: '10px', color: 'var(--text-main)', position: 'relative', zIndex: 10 }}>
               {t('contact.title')}
@@ -172,8 +172,8 @@ const Contact: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-panel"
-            style={{ padding: '40px', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}
+            className="glass-panel project-card"
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'relative', overflow: 'hidden' }}
           >
             <div style={{
               background: 'rgba(37, 211, 102, 0.1)',

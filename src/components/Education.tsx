@@ -30,8 +30,8 @@ const Education: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="glass-panel"
-              style={{ padding: '30px', display: 'flex', gap: '20px', alignItems: 'flex-start' }}
+              className="glass-panel project-card"
+              style={{ display: 'flex', gap: '20px', alignItems: 'flex-start', flexWrap: 'wrap' }}
             >
               <div style={{
                 background: 'rgba(255, 255, 255, 0.05)',

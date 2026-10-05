@@ -11,18 +11,18 @@ const Hero: React.FC = () => {
 
   return (
     <section id="about" className="section" style={{ minHeight: '100vh', position: 'relative', paddingTop: '120px' }}>
-      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '40px', flexWrap: 'wrap' }}>
+      <div className="container hero-layout">
         
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          style={{ flex: '1 1 500px' }}
+          style={{ flex: '1 1 min(100%, 500px)' }}
         >
           <h2 style={{ fontSize: '1.5rem', color: 'var(--accent-purple)', marginBottom: '10px' }}>
             {t('hero.greeting')}
           </h2>
-          <h1 style={{ fontSize: '4rem', marginBottom: '20px', lineHeight: 1.1 }}>
+          <h1 className="hero-title">
             <span style={{
               backgroundImage: `url(${fondoNombre})`,
               backgroundSize: 'cover',
@@ -36,9 +36,9 @@ const Hero: React.FC = () => {
             }}>
               {t('hero.name')}
             </span><br/>
-            <span className="text-gradient" style={{ fontSize: '2.5rem' }}>{t('hero.role')}</span>
+            <span className="text-gradient hero-role">{t('hero.role')}</span>
           </h1>
-          <p style={{ fontSize: '1.1rem', color: '#fff', marginBottom: '30px', maxWidth: '600px' }}>
+          <p className="hero-description">
             {t('hero.description')}
           </p>
           
@@ -68,17 +68,18 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div 
+          className="hero-image-container"
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          style={{ flex: '1 1 300px', display: 'flex', justifyContent: 'center' }}
+          style={{ flex: '1 1 min(100%, 300px)', display: 'flex', justifyContent: 'center' }}
         >
           <ElectricBorder
             color="#8b5cf6"
             speed={1}
             chaos={0.12}
             borderRadius={150}
-            style={{ borderRadius: '50%', width: '300px', height: '300px' }}
+            style={{ borderRadius: '50%', width: '100%', height: '100%', maxWidth: '300px', maxHeight: '300px', aspectRatio: '1/1' }}
           >
             <div style={{
               width: '100%',
