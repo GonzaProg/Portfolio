@@ -4,7 +4,7 @@
     "education": "Estudios",
     "skills": "Tecnologías",
     "projects": "Proyectos",
-    "contact": "Consultas"
+    "contact": "Contacto"
   },
   "hero": {
     "greeting": "Hola soy",
@@ -78,8 +78,8 @@
     }
   },
   "contact": {
-    "title": "Consultas",
-    "description": "Envíame un mensaje y me pondré en contacto contigo a la brevedad.",
+    "title": "Contacto",
+    "description": "Envíame un mensaje y con gusto te responderé.",
     "name": "Nombre",
     "email": "Correo Electrónico",
     "message": "Mensaje",

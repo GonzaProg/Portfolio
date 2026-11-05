@@ -1,9 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import ElectricBorder from '../animations/ElectricBorder';
 import SpecularButton from '../animations/SpecularButton';
-import miCara from '../assets/MiCara.jpeg';
+import Cara from '../assets/Cara.png';
 import fondoNombre from '../assets/FondoNombre.jpg';
 
 const Hero: React.FC = () => {
@@ -74,12 +73,9 @@ const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           style={{ flex: '1 1 min(100%, 300px)', display: 'flex', justifyContent: 'center' }}
         >
-          <ElectricBorder
+          <div
             color="#8b5cf6"
-            speed={1}
-            chaos={0.12}
-            borderRadius={150}
-            style={{ borderRadius: '50%', width: '100%', height: '100%', maxWidth: '300px', maxHeight: '300px', aspectRatio: '1/1' }}
+            style={{ width: '100%', height: '100%', maxWidth: '300px', maxHeight: '300px', aspectRatio: '1/1' }}
           >
             <div style={{
               width: '100%',
@@ -93,9 +89,9 @@ const Hero: React.FC = () => {
               position: 'relative'
             }}>
               {/* User Image */}
-              <img src={miCara} alt="Gonzalo Vaschchuk" style={{ width: '90%', height: '90%', objectFit: 'cover' }} />
+              <img src={Cara} alt="Gonzalo Vaschchuk" style={{ width: '90%', height: '90%', objectFit: 'cover' }} />
             </div>
-          </ElectricBorder>
+          </div>
         </motion.div>
 
       </div>
